@@ -1,4 +1,4 @@
-class Square
+class Shape
   def initialize(points)
 
   end
@@ -6,7 +6,7 @@ class Square
   class << self
     def new_from_file(file)
       File.open(file)
-      Square.new([])
+      Shape.new([])
     end
   end
 end
