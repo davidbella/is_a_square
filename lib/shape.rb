@@ -1,6 +1,8 @@
 class Shape
-  def initialize(points)
+  attr_reader :points
 
+  def initialize(points)
+    @points = points
   end
 
   class << self
