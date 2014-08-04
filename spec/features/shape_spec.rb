@@ -1,5 +1,6 @@
 require_relative '../spec_helper'
 require_relative '../../lib/shape'
+
 require_relative '../../lib/point'
 
 describe Shape do

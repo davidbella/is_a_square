@@ -1,6 +1,7 @@
 require_relative '../spec_helper'
-require_relative '../../lib/is_a_square'
 require_relative '../../lib/shape'
+
+require_relative '../../lib/is_a_square'
 
 describe IsASquare do
   describe '.valid?' do
@@ -54,6 +55,24 @@ describe IsASquare do
 
         it 'returns true' do
           expect(IsASquare.send(:all_sides_equal_length?, valid_square)).to be_true
+        end
+      end
+    end
+
+    describe '.all_diagonals_equal_length?' do
+      context 'with all diagonals not equal' do
+        let(:invalid_square) { Shape.new_from_file('spec/fixtures/invalid_square') }
+
+        it 'returns false' do
+          expect(IsASquare.send(:all_diagonals_equal_length?, invalid_square)).to be_false
+        end
+      end
+
+      context 'with all diagonals equal' do
+        let(:valid_square) { Shape.new_from_file('spec/fixtures/valid_square') }
+
+        it 'returns true' do
+          expect(IsASquare.send(:all_diagonals_equal_length?, valid_square)).to be_true
         end
       end
     end

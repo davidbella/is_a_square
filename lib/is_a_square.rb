@@ -1,7 +1,9 @@
+require_relative 'distance'
+
 class IsASquare
   class << self
     def valid?(shape)
-      four_sided_shape?(shape) && all_sides_equal_length?(shape)
+      four_sided_shape?(shape) && all_sides_equal_length?(shape) && all_diagonals_equal_length?(shape)
     end
 
     private
@@ -17,6 +19,17 @@ class IsASquare
             return false
           end
         end
+
+        true
+      end
+
+      def all_diagonals_equal_length?(shape)
+        return false unless four_sided_shape?(shape)
+
+        first_diagonal_length = Distance.between(shape.points[0], shape.points[2])
+        second_diagonal_length = Distance.between(shape.points[1], shape.points[3])
+
+        first_diagonal_length == second_diagonal_length
       end
   end
 end
