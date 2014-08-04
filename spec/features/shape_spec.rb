@@ -5,7 +5,9 @@ require_relative '../../lib/point'
 describe Shape do
   describe 'creating a shape' do
     let(:points) { [] }
-    it 'can be passed in an array of points to build the shape' do
+
+    it 'can be passed in an array of points to build the shape',
+       'the order of the points informs the order of the shape' do
       shape = Shape.new(points)
 
       expect(shape).to be_a(Shape)
@@ -14,7 +16,7 @@ describe Shape do
 
   describe '.new_from_file' do
     it 'reads a file from the file system' do
-      expect(File).to receive(:open)
+      expect(File).to receive(:open).and_call_original
 
       Shape.new_from_file('spec/fixtures/shape')
     end
@@ -23,6 +25,12 @@ describe Shape do
       shape = Shape.new_from_file('spec/fixtures/shape')
 
       expect(shape).to be_a(Shape)
+    end
+
+    it 'sets the points based on what was found in the file' do
+      shape = Shape.new_from_file('spec/fixtures/shape')
+
+      expect(shape.points.count).to eq 4
     end
   end
 
