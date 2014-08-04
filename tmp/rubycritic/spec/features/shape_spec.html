@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <h1 class="logo"><a href="../../overview.html" class="logo-link">RubyCritic</a></h1>
+      <nav class="project-nav">
+        <a href="../../overview.html" class="project-nav-item">Overview</a>
+        <a href="../../code_index.html" class="project-nav-item">Code</a>
+        <a href="../../smells_index.html" class="project-nav-item">Smells</a>
+      </nav>
+    </header>
+    <div class="file-header group">
+  <span class="rating-b circled-text circle ">B</span>
+  <h2 class="file-name">ShapeSpec</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2014-08-03 20:48:41 -0400'>2014-08-03 20:48:41 -0400</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      92 complexity
+    </div>
+    <div class="file-stat">
+      N/A complexity per method
+    </div>
+    <div class="file-stat">
+      4 churn
+    </div>
+    <div class="file-stat">
+      0 methods
+    </div>
+    <div class="file-stat">
+      0 duplication
+    </div>
+  </div>
+
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">require_relative &#39;../spec_helper&#39;
+require_relative &#39;../../lib/shape&#39;
+
+require_relative &#39;../../lib/point&#39;
+
+describe Shape do
+  describe &#39;creating a shape&#39; do
+    let(:points) { [] }
+
+    it &#39;can be passed in an array of points to build the shape&#39;,
+       &#39;the order of the points informs the order of the shape&#39; do
+      shape = Shape.new(points)
+
+      expect(shape).to be_a(Shape)
+    end
+  end
+
+  describe &#39;.new_from_file&#39; do
+    it &#39;reads a file from the file system&#39; do
+      expect(File).to receive(:open).and_call_original
+
+      Shape.new_from_file(&#39;spec/fixtures/shape&#39;)
+    end
+
+    it &#39;creates and returns a new shape object&#39; do
+      shape = Shape.new_from_file(&#39;spec/fixtures/shape&#39;)
+
+      expect(shape).to be_a(Shape)
+    end
+
+    it &#39;sets the points based on what was found in the file&#39; do
+      shape = Shape.new_from_file(&#39;spec/fixtures/shape&#39;)
+
+      expect(shape.points.count).to eq 4
+    end
+  end
+
+  describe &#39;#points&#39; do
+    let(:first_point)  { Point.new(1, 2) }
+    let(:second_point) { Point.new(2, 2) }
+    let(:third_point)  { Point.new(2, 1) }
+    let(:fourth_point) { Point.new(1, 1) }
+
+    let(:points) { [ first_point, second_point, third_point, fourth_point ] }
+    let(:shape) { Shape.new(points) }
+
+    it &#39;has an accessible array of points that make up the shape&#39; do
+      expect(shape.points).to be_a(Array)
+      expect(shape.points).to eq points
+    end
+  end
+end
+</code>
+
+    <script src='../../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter-2.0.js'></script>
+    <script src='../../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+  </body>
+</html>

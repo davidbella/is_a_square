@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <h1 class="logo"><a href="../overview.html" class="logo-link">RubyCritic</a></h1>
+      <nav class="project-nav">
+        <a href="../overview.html" class="project-nav-item">Overview</a>
+        <a href="../code_index.html" class="project-nav-item">Code</a>
+        <a href="../smells_index.html" class="project-nav-item">Smells</a>
+      </nav>
+    </header>
+    <div class="file-header group">
+  <span class="rating-a circled-text circle ">A</span>
+  <h2 class="file-name">IsASquare</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2014-08-03 20:48:41 -0400'>2014-08-03 20:48:41 -0400</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      57 complexity
+    </div>
+    <div class="file-stat">
+      14.3 complexity per method
+    </div>
+    <div class="file-stat">
+      3 churn
+    </div>
+    <div class="file-stat">
+      4 methods
+    </div>
+    <div class="file-stat">
+      0 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">require_relative &#39;distance&#39;
+
+class IsASquare
+  class &lt;&lt; self
+    def valid?(shape)
+      four_sided_shape?(shape) &amp;&amp; all_sides_equal_length?(shape) &amp;&amp; all_diagonals_equal_length?(shape)
+    end
+
+    private
+      def four_sided_shape?(shape)<ul class="nocode smells js-smells">  <li class="smell old">    <span class="description">(FeatureEnvy) IsASquare#four_sided_shape? refers to shape more than self          </span>  </li></ul>
+        shape.points.count == 4
+      end
+
+      def all_sides_equal_length?(shape)<ul class="nocode smells js-smells">  <li class="smell old">    <span class="description">(FeatureEnvy) IsASquare#all_sides_equal_length? refers to shape more than self          </span>  </li></ul>
+        first_side_length = Distance.between(shape.points.last, shape.points.first)<ul class="nocode smells js-smells">  <li class="smell old">    <span class="description">(DuplicateMethodCall) IsASquare#all_sides_equal_length? calls shape.points 3 times                        <a href="is_a_square.html#L15" class="js-smell-location">0</a>                  <a href="is_a_square.html#L17" class="js-smell-location">1</a>                  </span>  </li></ul>
+
+        shape.points.each_cons(2) do |side_points|<ul class="nocode smells js-smells">  <li class="smell old">    <span class="description">(DuplicateMethodCall) IsASquare#all_sides_equal_length? calls shape.points 3 times                        <a href="is_a_square.html#L15" class="js-smell-location">0</a>                  <a href="is_a_square.html#L17" class="js-smell-location">1</a>                  </span>  </li></ul>
+          if Distance.between(side_points[0], side_points[1]) != first_side_length
+            return false
+          end
+        end
+
+        true
+      end
+
+      def all_diagonals_equal_length?(shape)<ul class="nocode smells js-smells">  <li class="smell old">    <span class="description">(FeatureEnvy) IsASquare#all_diagonals_equal_length? refers to shape more than self          </span>  </li></ul>
+        return false unless four_sided_shape?(shape)
+
+        first_diagonal_length = Distance.between(shape.points[0], shape.points[2])<ul class="nocode smells js-smells">  <li class="smell old">    <span class="description">(DuplicateMethodCall) IsASquare#all_diagonals_equal_length? calls shape.points 4 times                        <a href="is_a_square.html#L29" class="js-smell-location">0</a>                  <a href="is_a_square.html#L30" class="js-smell-location">1</a>                  </span>  </li></ul>
+        second_diagonal_length = Distance.between(shape.points[1], shape.points[3])<ul class="nocode smells js-smells">  <li class="smell old">    <span class="description">(DuplicateMethodCall) IsASquare#all_diagonals_equal_length? calls shape.points 4 times                        <a href="is_a_square.html#L29" class="js-smell-location">0</a>                  <a href="is_a_square.html#L30" class="js-smell-location">1</a>                  </span>  </li></ul>
+
+        first_diagonal_length == second_diagonal_length
+      end
+  end
+end
+</code>
+
+    <script src='../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../assets/javascripts/jquery.tablesorter-2.0.js'></script>
+    <script src='../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../assets/javascripts/application.js'></script>
+  </body>
+</html>
